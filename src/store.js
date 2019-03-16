@@ -13,6 +13,13 @@ export default new Vuex.Store({
         data: 'Shail created this block!',
         previous_hash: '0x0',
         nonce: 0
+      },
+      {
+        index: 1,
+        timestamp: '',
+        data: 'Shail created this block 2 !',
+        previous_hash: '0x0',
+        nonce: 0
       }
     ],
     block: '',
@@ -40,6 +47,6 @@ export default new Vuex.Store({
       state.blockchain.push(payload);
     }
   },
-  
+
   actions: {}
 });
