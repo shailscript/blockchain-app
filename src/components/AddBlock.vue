@@ -6,7 +6,7 @@
             </div>
             <input type="text" class="form-control" placeholder="Block Data" v-model="data">
         </div>
-        <button class="btn btn-warning mx-5 mt-5">Create Block</button>
+        <button class="btn btn-warning mx-5 mt-5" @click="submitBlock">Create Block</button>
     </div>
 </template>
 
@@ -15,6 +15,13 @@ export default {
     data() {
         return {
             data: '',
+        }
+    },
+    methods: {
+        submitBlock() {
+            if(this.data !== '') {
+                this.$store.dispatch('createBlock', this.data);
+            }
         }
     }
 }

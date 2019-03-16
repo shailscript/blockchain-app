@@ -6,8 +6,8 @@
             </div>
             <input type="text" class="form-control" placeholder="Block Data" :value="block.data">
         </div>
-        <p class="text-left"><strong>PREVIOUS HASH</strong> {{ block.previous_hash }}</p>
-        <p class="text-left"><strong>BLOCK HASH</strong> {{ block.hash }}</p>
+        <p class="text-left"><span class="hash">PREVIOUS HASH</span> <span>{{ block.previous_hash }}</span></p>
+        <p class="text-left"><span class="hash">BLOCK HASH</span> <span>{{ block.hash }}</span></p>
         <div class="d-flex justify-content-between">
             <p class="lead"><strong>{{ blockName }}</strong></p>
         </div>
@@ -32,5 +32,8 @@ export default {
 
 
 <style scoped>
-
+.hash {
+        font-family: DINPro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+        font-size: 12px;
+    }
 </style>

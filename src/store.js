@@ -40,7 +40,8 @@ export default new Vuex.Store({
           timestamp: '',
           data: 'Shail created this block!',
           previous_hash: '0x0',
-          nonce: 0
+          nonce: 0,
+          hash: '' 
         }
       ]
     },
@@ -50,5 +51,15 @@ export default new Vuex.Store({
     }
   },
 
-  actions: {}
+  actions: {
+    createBlock( { commit, state}, data ) {
+      let block = {
+          index: state.blockchain.length,
+          timestamp: Date.now(),
+          data: data,
+          previous_hash: state.blockchain[state.blockchain.length - 1].hash,
+          nonce: 0
+      }
+    }
+  }
 });
