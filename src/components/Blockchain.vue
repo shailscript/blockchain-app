@@ -1,7 +1,6 @@
 <template>
   <div class="d-flex flex-column">
-    <p>{{ testdata }}</p>
-    <Block v-for='(block, index) in blockchain' :key='index'>
+    <Block v-for='(block, index) in blockchain' :key='index' :index='index'>
     </Block>
   </div>
 </template>
