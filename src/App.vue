@@ -1,6 +1,18 @@
 <template>
-  <div id="app">
-    <Blockchain />
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col-2">
+        Peer 1
+      </div>
+
+      <div class="col-8">
+        <Blockchain />
+      </div>
+
+      <div class="col-2">
+        <button class="btn btn-danger">Reset Blockchain</button>
+      </div>
+    </div>
   </div>
 </template>
 
