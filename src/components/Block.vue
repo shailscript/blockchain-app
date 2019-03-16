@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card my-5">
         {{blockchain[index].data}}
     </div>
 </template>

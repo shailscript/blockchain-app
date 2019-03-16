@@ -12,14 +12,16 @@ export default new Vuex.Store({
         timestamp: '',
         data: 'Shail created this block!',
         previous_hash: '0x0',
-        nonce: 0
+        nonce: 0,
+        hash: ''
       },
       {
         index: 1,
         timestamp: '',
         data: 'Shail created this block 2 !',
         previous_hash: '0x0',
-        nonce: 0
+        nonce: 0,
+        hash: ''
       }
     ],
     block: '',
