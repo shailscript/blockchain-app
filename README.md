@@ -1,4 +1,5 @@
-# blockchain-app
+# Blockchain Demo Application
+This is a repository for a demo web application on vuejs to implement blockchain features.
 
 ## Project setup
 ```
