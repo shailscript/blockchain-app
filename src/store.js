@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { ethers } from 'ethers';
 
 Vue.use(Vuex);
 
@@ -25,7 +26,7 @@ export default new Vuex.Store({
       }
     ],
     block: '',
-
+    difficulty: 1
   },
 
   mutations: {
@@ -60,6 +61,28 @@ export default new Vuex.Store({
           previous_hash: state.blockchain[state.blockchain.length - 1].hash,
           nonce: 0
       }
+      
+      let str = JSON.stringify(block)
+      let hexifiedBl = ''
+      for (var i=0; i<str.length; i++) {
+        hexifiedBl += str.charCodeAt(i).toString(16);
+      }
+
+      let hashedBlock = ethers.utils.keccak256("0x" + hexifiedBl);
+
+      while(!(hashedBlock.substr(2,state.difficulty) === '0'.repeat(state.difficulty))) {
+        block.nonce = block.nonce + 1;
+        str = JSON.stringify(block)
+        hexifiedBl = ''
+        for (i=0; i<str.length; i++) {
+          hexifiedBl += str.charCodeAt(i).toString(16);
+        }
+        hashedBlock = ethers.utils.keccak256("0x" + hexifiedBl);
+      }
+
+      block [ "hash" ] = hashedBlock;
+      commit('pushToBlockchain', block);
     }
-  }
+  } // end of actions
+
 });
