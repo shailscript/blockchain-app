@@ -47,9 +47,11 @@ export default new Vuex.Store({
       ]
     },
 
-    pushToBlockchain(state, {block, index}) {
+    setBlockchain(state, {block, index}) {
       console.log('from mutation', block)
-      state.blockchain[index] = block;
+      //state.blockchain[index] = block;
+      //Learning : https://vuejs.org/v2/guide/list.html#Caveats
+      Vue.set(state.blockchain, index, block)
     },
 
   },
@@ -88,7 +90,7 @@ export default new Vuex.Store({
 
       console.log('from add to blockchain ', block);
       
-      commit('pushToBlockchain', {block, index} );
+      commit('setBlockchain', {block, index} );
     }
   } // end of actions
 
