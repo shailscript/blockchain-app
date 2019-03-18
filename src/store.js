@@ -66,7 +66,7 @@ export default new Vuex.Store({
           nonce: 0
       }
 
-      console.log('from add to blockchain', blockData, index );
+      console.log('Args recieved in addToBlockchain method', blockData, index );
 
       let str = JSON.stringify(block)
       let hexifiedBl = ''
@@ -88,7 +88,7 @@ export default new Vuex.Store({
 
       block [ "hash" ] = hashedBlock;
 
-      console.log('from add to blockchain ', block);
+      console.log('Final block to be commited ', block);
       
       commit('setBlockchain', {block, index} );
     }
