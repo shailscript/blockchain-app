@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     resetBlockchain() {
-      this.$store.commit('resetBlockchain');
+      this.$store.commit("resetBlockchain");
     }
   }
 };

@@ -23,7 +23,6 @@ export default {
             let blockData = this.data;
             let index = this.$store.state.blockchain.length;
             if(this.data !== '') {
-                console.log(blockData, index);
                 this.$store.dispatch('addToBlockchain', { blockData, index });
             }
         }

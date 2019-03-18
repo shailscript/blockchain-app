@@ -22,12 +22,11 @@ export default {
     computed: {
         blockData: {
             get() {
-                console.log("This dot get block index" + this.index);
                 return this.$store.state.blockchain[this.index].data;
             },
             set(blockData) {
                 const blockIndex = this.index;
-                console.log('ye barbaad nahi hai? ', blockData, blockIndex);
+                console.log(`Here's the DATA: ${blockData} and INDEX: ${blockIndex}`);
                 this.$store.dispatch('addToBlockchain', { blockData, blockIndex });
             }
         },
