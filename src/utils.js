@@ -17,7 +17,7 @@ export const generateBlockAndHash = function(block, BC_DIFFICULTY) {
     let hashedBlock = hashBlock(block);
     
     while(!(hashedBlock.substr(2,BC_DIFFICULTY) === '0'.repeat(BC_DIFFICULTY))) {
-        block.nounce = block.nounce + 1
+        block.nounce = block.nounce + 1;
         hashedBlock = hashBlock(block);
     }
     

@@ -4,7 +4,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Data</div>
             </div>
-            <input type="text" class="form-control" placeholder="Block Data" :value="block.data">
+            <input type="text" class="form-control" placeholder="Block Data" v-model="blockData">
         </div>
         <p class="text-left"><span class="hash">PREVIOUS HASH</span> <span>{{ block.previous_hash }}</span></p>
         <p class="text-left"><span class="hash">BLOCK HASH</span> <span>{{ block.hash }}</span></p>
@@ -20,11 +20,22 @@ export default {
         'index'
     ],
     computed: {
+        blockData: {
+            get() {
+                console.log("This dot get block index" + this.index);
+                return this.$store.state.blockchain[this.index].data;
+            },
+            set(blockData) {
+                const blockIndex = this.index;
+                console.log('ye barbaad nahi hai? ', blockData, blockIndex);
+                this.$store.dispatch('addToBlockchain', { blockData, blockIndex });
+            }
+        },
         block() {
             return this.$store.state.blockchain[this.index];
         },
         blockName() {
-            return this.$store.state.blockchain[this.index].index === 0 ? 'GENESIS BLOCK' : `BLOCK #${this.$store.state.blockchain[this.index].index}` 
+            return this.$store.state.blockchain[this.index].index === 0 ? 'GENESIS BLOCK' : `BLOCK #${this.$store.state.blockchain[this.index].index}`; 
         }
     }
 }

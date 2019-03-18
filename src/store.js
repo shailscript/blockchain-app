@@ -47,21 +47,25 @@ export default new Vuex.Store({
       ]
     },
 
-    pushToBlockchain(state, payload) {
-      state.blockchain.push(payload);
-    }
+    pushToBlockchain(state, {block, index}) {
+      console.log('from mutation', block)
+      state.blockchain[index] = block;
+    },
+
   },
 
   actions: {
-    createBlock( { commit, state}, data ) {
+    addToBlockchain ( { commit, state}, {blockData, index} ){
       let block = {
-          index: state.blockchain.length,
+          index: index,
           timestamp: Date.now(),
-          data: data,
+          data: blockData,
           previous_hash: state.blockchain[state.blockchain.length - 1].hash,
           nonce: 0
       }
-      
+
+      console.log('from add to blockchain', blockData, index );
+
       let str = JSON.stringify(block)
       let hexifiedBl = ''
       for (var i=0; i<str.length; i++) {
@@ -81,7 +85,10 @@ export default new Vuex.Store({
       }
 
       block [ "hash" ] = hashedBlock;
-      commit('pushToBlockchain', block);
+
+      console.log('from add to blockchain ', block);
+      
+      commit('pushToBlockchain', {block, index} );
     }
   } // end of actions
 

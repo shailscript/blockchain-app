@@ -10,7 +10,7 @@
       </div>
 
       <div class="col-2">
-        <button class="btn btn-danger">Reset Blockchain</button>
+        <button class="btn btn-danger" @click='resetBlockchain'>Reset Blockchain</button>
       </div>
     </div>
   </div>
@@ -23,6 +23,11 @@ export default {
   name: "app",
   components: {
     Blockchain
+  },
+  methods: {
+    resetBlockchain() {
+      this.$store.commit('resetBlockchain');
+    }
   }
 };
 </script>

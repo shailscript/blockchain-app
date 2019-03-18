@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex flex-column">
+    {{ blockchain }}
     <Block v-for='(block, index) in blockchain' :key='index' :index='index'>
     </Block>
 
@@ -12,18 +13,34 @@
 <script>
 import Block from './Block.vue'
 import AddBlock from './AddBlock.vue'
+import { mapState } from 'vuex';
+
 export default {
   name: "Blockchain",
   data() {
     return {
-      testdata: "Hey this is Shailendra Shukla"
+      testdata: "Hey this is Shailendra Shukla",
     }
   },
-  computed: {
-    blockchain() {
-      return this.$store.state.blockchain;
+
+  computed: mapState(['blockchain']),
+  watch: {
+    blockchain(newValue, oldValue) {
+      console.log(`Updating from ${oldValue} to ${newValue}`);
     }
   },
+
+  // mounted() {
+  //     this.$store.subscribe((mutation, state) => {
+  //       switch(mutation.type) {
+  //         case 'pushToBlockchain':
+  //           const blockchain = state.blockchain;
+
+  //           console.log(`Updating to ${blockchain}`);
+  //       }
+  //     })
+  // },
+
   components: {
     Block,
     AddBlock
