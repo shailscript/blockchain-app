@@ -48,8 +48,7 @@ export default new Vuex.Store({
     },
 
     setBlockchain(state, {block, index}) {
-      console.log('from mutation', block)
-      //state.blockchain[index] = block;
+      //state.blockchain[index] = block; -- void reactivity in Vue
       //Learning : https://vuejs.org/v2/guide/list.html#Caveats
       Vue.set(state.blockchain, index, block)
     },
