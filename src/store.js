@@ -38,8 +38,6 @@ export default new Vuex.Store({
 
     setDifficulty(state, payload) {
       state.difficulty = payload;
-      
-      console.log('Difficulty set to : ', payload);
     }
 
   },
@@ -53,8 +51,6 @@ export default new Vuex.Store({
           previous_hash: payload.index === 0 ? 0 : state.blockchain[payload.index - 1 ].hash,
           nonce: 0
       }
-
-      console.log('Args recieved in addToBlockchain method', payload.blockData, payload.index );
 
       let str = JSON.stringify(block)
       let hexifiedBl = ''
@@ -76,7 +72,6 @@ export default new Vuex.Store({
 
       block [ "hash" ] = hashedBlock;
 
-      console.log('Final block to be commited ', block);
       let index = payload.index;
       commit('setBlockchain', {block, index} );
     },

@@ -29,7 +29,6 @@ export default {
             },
             set(blockData) {
                 const blockIndex = this.index;
-                console.log(`Here's the DATA: ${blockData} and INDEX: ${blockIndex}`);
                 let data = {
                     blockData: blockData,
                     index: blockIndex
@@ -64,7 +63,6 @@ export default {
             const blockIndex = this.index;
             //const blockData = this.blockData.get(); -- ddn't work!!
             const blockData = this.$store.state.blockchain[this.index].data;
-            console.log(`Here's the DATA: ${blockData} and INDEX: ${blockIndex}`);
             let data = {
                 blockData: blockData,
                 index: blockIndex

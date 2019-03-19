@@ -31,7 +31,6 @@ export default {
   methods: {
     resetBlockchain(event) {
       event.preventDefault();
-      console.log(this.difficulty);
       this.$store.dispatch("resetBlockchain", this.difficulty);
     }
   }
