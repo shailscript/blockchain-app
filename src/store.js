@@ -10,19 +10,11 @@ export default new Vuex.Store({
     blockchain: [
       {
         index: 0,
-        timestamp: '',
+        timestamp: 0,
         data: 'Shail created this block!',
         previous_hash: '0x0',
         nonce: 0,
-        hash: ''
-      },
-      {
-        index: 1,
-        timestamp: '',
-        data: 'Shail created this block 2 !',
-        previous_hash: '0x0',
-        nonce: 0,
-        hash: ''
+        hash: '0x0a776947c6c998a0003268e7fed88cf50e15e85bf57b10c52879a1d102661cff'
       }
     ],
     block: '',
