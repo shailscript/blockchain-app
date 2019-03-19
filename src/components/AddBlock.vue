@@ -22,8 +22,12 @@ export default {
             event.preventDefault();
             let blockData = this.data;
             let index = this.$store.state.blockchain.length;
+            let data = {
+                blockData: blockData,
+                index: index
+            }
             if(this.data !== '') {
-                this.$store.dispatch('addToBlockchain', { blockData, index });
+                this.$store.dispatch('addToBlockchain', data);
             }
         }
     }

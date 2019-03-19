@@ -6,7 +6,10 @@
       </div>
 
       <div class="col-2">
-        <button class="btn btn-danger" @click='resetBlockchain'>Reset Blockchain</button>
+        <div class="d-flex flex-column">
+          <input type="number" v-model='difficulty'>
+          <button class="btn btn-danger" @click='resetBlockchain'>Reset Blockchain</button>
+        </div>
       </div>
     </div>
   </div>
@@ -20,9 +23,16 @@ export default {
   components: {
     Blockchain
   },
+  data() {
+    return {
+      difficulty : this.$store.state.difficulty
+    }
+  },
   methods: {
-    resetBlockchain() {
-      this.$store.commit("resetBlockchain");
+    resetBlockchain(event) {
+      event.preventDefault();
+      console.log(this.difficulty);
+      this.$store.dispatch("resetBlockchain", this.difficulty);
     }
   }
 };

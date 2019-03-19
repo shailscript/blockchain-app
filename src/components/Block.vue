@@ -1,15 +1,18 @@
 <template>
-    <div class="card m-5 p-5">
-        <div class="input-group">
+    <div class="card my-5 px-5 pt-5">
+        <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">Data</div>
             </div>
             <input type="text" class="form-control" placeholder="Block Data" v-model="blockData">
         </div>
-        <p class="text-left"><span class="hash">PREVIOUS HASH</span> <span>{{ block.previous_hash }}</span></p>
-        <p class="text-left"><span class="hash">BLOCK HASH</span> <span>{{ block.hash }}</span></p>
-        <div class="d-flex justify-content-between">
+        <p class="text-left hash">LAST BLOCK HASH <span class="small badge" :class="[ match ? 'badge-success' : 'badge-danger' ]">{{ block.previous_hash }}</span></p>
+        <p class="text-left hash">THIS BLOCK HASH <span class="small badge badge-success">{{ block.hash }}</span></p>
+        <div class="d-flex justify-content-between py-3">
             <p class="lead"><strong>{{ blockName }}</strong></p>
+            <p class="lead">{{ date }}</p>
+            <button class="btn btn-secondary" v-if="!match" @click='remineBlock'>Re-mine!</button>
+            <p v-else class="nounce">{{ block.nonce }}</p>
         </div>
     </div>
 </template>
@@ -27,23 +30,67 @@ export default {
             set(blockData) {
                 const blockIndex = this.index;
                 console.log(`Here's the DATA: ${blockData} and INDEX: ${blockIndex}`);
-                this.$store.dispatch('addToBlockchain', { blockData, blockIndex });
+                let data = {
+                    blockData: blockData,
+                    index: blockIndex
+                }
+                this.updatedBlockData = blockData; 
+                this.$store.dispatch('addToBlockchain', data);
             }
+        },
+        date() {
+            let date = 'Eternity';
+            if(this.$store.state.blockchain[this.index].timestamp !== 0) {
+                date = new Date(this.$store.state.blockchain[this.index].timestamp)
+                let ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                return date.getDate() + ' ' + ms[date.getMonth()] + ' ' + date.getFullYear() + ', at ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            }
+            return date;
         },
         block() {
             return this.$store.state.blockchain[this.index];
         },
         blockName() {
             return this.$store.state.blockchain[this.index].index === 0 ? 'GENESIS BLOCK' : `BLOCK #${this.$store.state.blockchain[this.index].index}`; 
+        },
+        match() {
+            if(this.index !== 0)
+            return this.$store.state.blockchain[this.index].previous_hash ===  this.$store.state.blockchain[this.index - 1].hash;
+            return true;
         }
-    }
+    },
+    methods: {
+        remineBlock() {
+            const blockIndex = this.index;
+            //const blockData = this.blockData.get(); -- ddn't work!!
+            const blockData = this.$store.state.blockchain[this.index].data;
+            console.log(`Here's the DATA: ${blockData} and INDEX: ${blockIndex}`);
+            let data = {
+                blockData: blockData,
+                index: blockIndex
+            }
+            this.$store.dispatch('addToBlockchain', data);
+        }
+}
 }
 </script>
 
 
 <style scoped>
 .hash {
-        font-family: DINPro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-        font-size: 12px;
-    }
+    font-family: DINPro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    font-size: 12px;
+}
+.small {
+    font-size: 9pt;
+    font-family: "Courier New";
+}
+.nounce {
+    padding: 2px 10px;
+    border: solid grey 1px;
+    border-radius: 10px;
+    background: rgb(212, 210, 210);
+    color: black;
+
+}
 </style>

@@ -26,24 +26,16 @@ export default new Vuex.Store({
       state.loading = payload;
     },
 
-    resetBlockchain(state) {
-      state.blockchain = [
-        {
-          index: 0,
-          timestamp: '',
-          data: 'Shail created this block!',
-          previous_hash: '0x0',
-          nonce: 0,
-          hash: '' 
-        }
-      ]
-    },
-
     setBlockchain(state, {block, index}) {
       //state.blockchain[index] = block; -- void reactivity in Vue
       //Learning : https://vuejs.org/v2/guide/list.html#Caveats
       Vue.set(state.blockchain, index, block)
     },
+
+    setDifficulty(state, payload) {
+      state.difficulty = payload;
+      console.log('Difficulty set to : ', payload);
+    }
 
   },
 
@@ -83,9 +75,15 @@ export default new Vuex.Store({
       let index = payload.index;
       commit('setBlockchain', {block, index} );
     },
-      
-      commit('setBlockchain', {block, index} );
+
+    resetBlockchain( {dispatch, commit}, payload) {
+      let block = {
+        index: 0,
+        blockData: 'Shail created this block!'
+      };
+      commit('setDifficulty', payload);
+      dispatch('addToBlockchain', block);
     }
-  } // end of actions
+  },
 
 });
