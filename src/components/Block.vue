@@ -4,14 +4,14 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Data</div>
             </div>
-            <input type="text" class="form-control" placeholder="Block Data" v-model="blockData">
+            <input type="text" class="form-control" placeholder="No data here" v-model="blockData" :disabled="!match">
         </div>
         <p class="text-left hash">LAST BLOCK HASH <span class="small badge" :class="[ match ? 'badge-success' : 'badge-danger' ]">{{ block.previous_hash }}</span></p>
         <p class="text-left hash">THIS BLOCK HASH <span class="small badge badge-success">{{ block.hash }}</span></p>
         <div class="d-flex justify-content-between py-3">
             <p class="lead"><strong>{{ blockName }}</strong></p>
             <p class="lead">{{ date }}</p>
-            <button class="btn btn-secondary" v-if="!match" @click='remineBlock'>Re-mine!</button>
+            <button class="btn btn-secondary-outline btn-sm" v-if="!match" @click='remineBlock' >Remine!</button>
             <p v-else class="nounce">{{ block.nonce }}</p>
         </div>
     </div>

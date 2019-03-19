@@ -11,7 +11,7 @@ export default new Vuex.Store({
       {
         index: 0,
         timestamp: 0,
-        data: 'Shail created this block!',
+        data: '',
         previous_hash: '0x0',
         nonce: 0,
         hash: '0x0a776947c6c998a0003268e7fed88cf50e15e85bf57b10c52879a1d102661cff'
@@ -32,8 +32,13 @@ export default new Vuex.Store({
       Vue.set(state.blockchain, index, block)
     },
 
+    unsetBlockchain(state){
+      state.blockchain = [];
+    },
+
     setDifficulty(state, payload) {
       state.difficulty = payload;
+      
       console.log('Difficulty set to : ', payload);
     }
 
@@ -79,8 +84,9 @@ export default new Vuex.Store({
     resetBlockchain( {dispatch, commit}, payload) {
       let block = {
         index: 0,
-        blockData: 'Shail created this block!'
+        blockData: ''
       };
+      commit('unsetBlockchain');
       commit('setDifficulty', payload);
       dispatch('addToBlockchain', block);
     }
