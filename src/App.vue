@@ -1,17 +1,29 @@
 <template>
-  <div id="app" class="container">
-    <div class="row">
-      <div class="col-10">
-        <Blockchain />
+  <div id="app">
+    <div class="container-fluid py-3">
+      <div class="row dark">
+        <div class="col py-3 d-flex flex-column justify-content-center">
+          <h1 class="font-weight-light">
+            <strong>Let's play around Blockchain!</strong>
+          </h1>
+        </div>
       </div>
+      <div class="row">
+        <div class="d-flex justify-content-center m-auto py-5">
+            <input type="number" v-model="difficulty" class="form-control mr-3">
+            <button class="btn btn-danger" @click="resetBlockchain">Reset Blockchain</button>
+          </div>
+      </div>
+    </div>
 
-      <div class="col-2">
-        <div class="d-flex flex-column">
-          <input type="number" v-model='difficulty'>
-          <button class="btn btn-danger" @click='resetBlockchain'>Reset Blockchain</button>
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-10">
+          <Blockchain/>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -23,11 +35,13 @@ export default {
   components: {
     Blockchain
   },
+
   data() {
     return {
-      difficulty : this.$store.state.difficulty
-    }
+      difficulty: this.$store.state.difficulty
+    };
   },
+
   methods: {
     resetBlockchain(event) {
       event.preventDefault();
@@ -44,6 +58,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: #2c3e50;
+}
+.dark {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: black;
 }
 </style>

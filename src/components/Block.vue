@@ -1,17 +1,39 @@
 <template>
-    <div class="card my-5 px-5 pt-5">
+    <div class="card mb-5 px-5 py-5">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">Data</div>
             </div>
-            <input type="text" class="form-control" placeholder="No data here" v-model="blockData" :disabled="!match">
+
+            <input 
+                type="text" 
+                class="form-control" 
+                placeholder="No data here" 
+                v-model="blockData" 
+                :disabled="!match">
         </div>
-        <p class="text-left hash">LAST BLOCK HASH <span class="small badge" :class="[ match ? 'badge-success' : 'badge-danger' ]">{{ block.previous_hash }}</span></p>
+        
+        <p 
+            class="text-left hash">
+            LAST BLOCK HASH 
+            <span 
+                class="small badge" 
+                :class="[ match ? 'badge-success' : 'badge-danger' ]">
+                {{ block.previous_hash }}
+            </span>
+        </p>
+        
         <p class="text-left hash">THIS BLOCK HASH <span class="small badge badge-success">{{ block.hash }}</span></p>
+        
         <div class="d-flex justify-content-between py-3">
             <p class="lead"><strong>{{ blockName }}</strong></p>
             <p class="lead">{{ date }}</p>
-            <button class="btn btn-secondary-outline btn-sm" v-if="!match" @click='remineBlock' >Remine!</button>
+            <button 
+                class="btn btn-secondary-outline btn-sm" 
+                v-if="!match" 
+                @click='remineBlock'>
+                Remine!
+            </button>
             <p v-else class="nounce">{{ block.nonce }}</p>
         </div>
     </div>
@@ -22,6 +44,7 @@ export default {
     props: [
         'index'
     ],
+
     computed: {
         blockData: {
             get() {
@@ -37,6 +60,7 @@ export default {
                 this.$store.dispatch('addToBlockchain', data);
             }
         },
+
         date() {
             let date = 'Eternity';
             if(this.$store.state.blockchain[this.index].timestamp !== 0) {
@@ -46,22 +70,26 @@ export default {
             }
             return date;
         },
+
         block() {
             return this.$store.state.blockchain[this.index];
         },
+
         blockName() {
             return this.$store.state.blockchain[this.index].index === 0 ? 'GENESIS BLOCK' : `BLOCK #${this.$store.state.blockchain[this.index].index}`; 
         },
+
         match() {
             if(this.index !== 0)
             return this.$store.state.blockchain[this.index].previous_hash ===  this.$store.state.blockchain[this.index - 1].hash;
             return true;
         }
     },
+
     methods: {
         remineBlock() {
             const blockIndex = this.index;
-            //const blockData = this.blockData.get(); -- ddn't work!!
+            //const blockData = this.blockData.get(); -- didn't work!!
             const blockData = this.$store.state.blockchain[this.index].data;
             let data = {
                 blockData: blockData,
@@ -69,7 +97,7 @@ export default {
             }
             this.$store.dispatch('addToBlockchain', data);
         }
-}
+    }
 }
 </script>
 

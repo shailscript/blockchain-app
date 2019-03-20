@@ -1,9 +1,12 @@
 <template>
   <div class="d-flex flex-column">
-    <Block v-for='(block, index) in blockchain' :key='index' :index='index' >
+    <Block 
+      v-for='(block, index) in blockchain' 
+      :key='index' 
+      :index='index' >
     </Block>
 
-    <div class="d-flex justify-content-around">
+    <div class="card mb-5">
       <AddBlock />
     </div>
   </div>
